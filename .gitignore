@@ -1,3 +1,6 @@
+# Ignore config variables
+gsheet-pnl-report/config.js
+
 # Logs
 logs
 *.log
