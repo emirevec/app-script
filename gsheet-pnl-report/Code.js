@@ -1,11 +1,9 @@
-import { SOURCE_SHEET_NAME, REPORT_SHEET_NAME } from "./config";
-
 function generateReport() {
 
   // 2. Get references to the source and report sheets
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sourceSheet = ss.getSheetByName(sourceSheetName);
-  const reportSheet = ss.getSheetByName(reportSheetName);
+  const sourceSheet = ss.getSheetByName(SOURCE_SHEET_NAME);
+  const reportSheet = ss.getSheetByName(REPORT_SHEET_NAME);
 
   // 3. Check if the sheets exist
   if (!sourceSheet || !reportSheet) {
