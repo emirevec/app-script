@@ -1,5 +1,6 @@
 # Ignore config variables
 gsheet-pnl-report/config.js
+gsheet-exchange-rates/config.js
 
 # Logs
 logs
