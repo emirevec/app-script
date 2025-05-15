@@ -5,8 +5,8 @@ function updateExchangeRateInSheet({sheetName, data}) {
     throw new Error(`${functionName}: Sheet name is required.`);
   }
 
-  if (!data || !data.date || !data.value || !data.average) {
-    throw new Error(`${functionName}: Data with date, value, and average is required.`);
+  if (!data || !data.date || !data.USD_ARS_Divisa || !data.USD_ARS_Divisa_Average || !data.USD_ARS_Billete) {
+    throw new Error(`${functionName}: Data with date, USD_ARS_Divisa, USD_ARS_Divisa_Average, and USD_ARS_Billete is required.`);
   }
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -18,7 +18,8 @@ function updateExchangeRateInSheet({sheetName, data}) {
 
   sheet.insertRowBefore(2);
   sheet.getRange(2, 1).setValue(data.date);
-  sheet.getRange(2, 2).setValue(data.value);
-  sheet.getRange(2, 3).setValue(data.average);
+  sheet.getRange(2, 2).setValue(data.USD_ARS_Divisa);
+  sheet.getRange(2, 3).setValue(data.USD_ARS_Divisa_Average);
+  sheet.getRange(2, 4).setValue(data.USD_ARS_Billete);
   Logger.log(`${functionName}:Successfully updated exchange rate on ${data.date} in sheet "${sheetName}".`);
 }

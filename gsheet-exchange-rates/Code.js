@@ -3,12 +3,14 @@ function main(){
   const config = getConfig();
 
   try {
-    const exchangeRate = fetchBCRAExchangeRateByDate({date: config.today});
-    const averageRate = calculateAverageOfTheLast30Days({sheetName: config.reportSheetName, thirtythValue: exchangeRate.value});
+    const divisaVendedorBCRA = fetchBCRAExchangeRateByDate({date: config.today});
+    const averageRate = calculateAverageOfTheLast30Days({sheetName: config.reportSheetName, thirtythValue: divisaVendedorBCRA.value});
+    const billeteVendedorBNA = scrapeBNAExchangeRate()
     const updatedExchageRate = {
-      date: exchangeRate.date,
-      value: exchangeRate.value,
-      average: averageRate
+      date: config.today,
+      USD_ARS_Divisa: divisaVendedorBCRA.value,
+      USD_ARS_Divisa_Average: averageRate,
+      USD_ARS_Billete: billeteVendedorBNA,
     }
 
     updateExchangeRateInSheet({sheetName: config.reportSheetName, data: updatedExchageRate});
