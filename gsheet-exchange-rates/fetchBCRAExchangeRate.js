@@ -38,5 +38,6 @@ function fetchBCRAExchangeRateByDate({date}){
 
   catch (error) {
     Logger.log(`${functionName}: An error occurred: ${error}`);
+    return null
   }
 }
