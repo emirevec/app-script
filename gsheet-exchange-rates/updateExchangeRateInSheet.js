@@ -1,8 +1,12 @@
 function updateExchangeRateInSheet({sheetName, data}) {
   const functionName = "updateExchangeRateInSheet";
 
-  if (!sheetName || !data) {
-    throw new Error(`${functionName}: Sheet name and data are both required.`);
+  if (!sheetName) {
+    throw new Error(`${functionName}: Sheet name is required.`);
+  }
+
+  if (!data || !data.date || !data.value || !data.average) {
+    throw new Error(`${functionName}: Data with date, value, and average is required.`);
   }
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -15,5 +19,6 @@ function updateExchangeRateInSheet({sheetName, data}) {
   sheet.insertRowBefore(2);
   sheet.getRange(2, 1).setValue(data.date);
   sheet.getRange(2, 2).setValue(data.value);
-  Logger.log(`Successfully updated exchange rate on ${data.date} in sheet "${sheetName}".`);
+  sheet.getRange(2, 3).setValue(data.average);
+  Logger.log(`${functionName}:Successfully updated exchange rate on ${data.date} in sheet "${sheetName}".`);
 }
