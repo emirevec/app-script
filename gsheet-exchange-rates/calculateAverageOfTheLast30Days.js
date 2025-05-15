@@ -1,5 +1,5 @@
-function calculateAverageRate({sheetName, thirtythValue}) {
-  const functionName = 'calculateAverageRate';
+function calculateAverageOfTheLast30Days({sheetName, thirtythValue}) {
+  const functionName = 'calculateAverageOfTheLast30Days';
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = ss.getSheetByName(sheetName);
