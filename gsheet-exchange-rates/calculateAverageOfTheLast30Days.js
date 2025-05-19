@@ -1,5 +1,9 @@
 function calculateAverageOfTheLast30Days({sheetName, thirtythValue}) {
   const functionName = 'calculateAverageOfTheLast30Days';
+  if (!sheetName || !thirtythValue) {
+    throw new Error(`${functionName}: Both sheetName and thirtythValue are required.`); 
+  }
+
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = ss.getSheetByName(sheetName);
