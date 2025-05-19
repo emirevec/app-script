@@ -1,8 +1,10 @@
 function fetchBCRAExchangeRateByDate({date}){
   const functionName = "fetchBCRAExchangeRateByDate";
+
   if (!date) {
-    throw new Error("Date is required.");
+    throw new Error(`${functionName}:Date is required.`);
   }
+
   const formattedDate = Utilities.formatDate(date, "America/Argentina/Buenos_Aires", "yyyy-MM-dd");
   const API_BASE_URL = "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/usd?"
   const queryParams = `fechaDesde=${formattedDate}&fechaHasta=${formattedDate}`
@@ -11,11 +13,22 @@ function fetchBCRAExchangeRateByDate({date}){
   try {
     Logger.log(`${functionName}: Fetching exchange rate from: ${apiEndpoint}`);
     const response = UrlFetchApp.fetch(apiEndpoint);
+    const responseCode = response.getResponseCode();
+
+    if (responseCode !== 200) {
+      throw new Error(`Failed to fetch data from BCRA API. Status code: ${responseCode}`);
+    }
+    
     const jsonResponse = response.getContentText();
     const data = JSON.parse(jsonResponse);
 
-    if (!data || !data.results || data.results.length === 0) {
+    if (!data || !data.results) {
       throw new Error("No results found in the API response.");
+    }
+
+    if (data.results.length === 0) {
+      Logger.log(`${functionName}: No data found for the specified date.`);
+      return null;
     }
 
     const latestResult = data.results[0]; 

@@ -3,7 +3,13 @@ function main(){
   const config = getConfig();
 
   try {
-    const divisaVendedorBCRA = fetchBCRAExchangeRateByDate({date: config.today});
+    let divisaVendedorBCRA = fetchBCRAExchangeRateByDate({date: config.today});
+
+    if (!divisaVendedorBCRA) {
+      Logger.log(`${functionName}: The last available value will be repeated.`);
+      divisaVendedorBCRA = getLastBCRAValidValue({sheetName: config.reportSheetName, date: config.today});
+    }
+
     const averageRate = calculateAverageOfTheLast30Days({sheetName: config.reportSheetName, thirtythValue: divisaVendedorBCRA.value});
     const billeteVendedorBNA = scrapeBNAExchangeRate()
     const updatedExchageRate = {
