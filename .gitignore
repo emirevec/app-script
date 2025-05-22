@@ -2,6 +2,9 @@
 gsheet-pnl-report/config.js
 gsheet-exchange-rates/config.js
 
+# Ignore draft files
+drafts/*
+
 # Logs
 logs
 *.log
