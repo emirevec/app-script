@@ -1,8 +1,8 @@
 function calculate30DaysAverage({sheetName, thirtythValue}) {
   const functionName = 'calculate30DaysAverage';
 
-  if (!sheetName || !thirtythValue) {
-    throw new Error(`${functionName}: Both sheetName and thirtythValue are required.`); 
+  if (!sheetName) {
+    throw new Error(`${functionName}: SheetName is required.`); 
   }
 
   try {
@@ -10,8 +10,7 @@ function calculate30DaysAverage({sheetName, thirtythValue}) {
     const sheet = ss.getSheetByName(sheetName);
 
     if (!sheet) {
-      Logger.log(`${functionName}: Sheet "${sheetName}" not found.`);
-      return null;
+      throw new Error(`Sheet "${sheetName}" not found.`);
     }
 
     const rateValues = sheet.getRange(2, 4, 29, 1).getValues();
@@ -70,8 +69,8 @@ function updateExchangeRateInSheet({sheetName, data}) {
     throw new Error(`${functionName}: Sheet name is required.`);
   }
 
-  if (!data || !data.date || !data.dailyRate || !data.averageRate || !data.originalRate) {
-    throw new Error(`${functionName}: Data with date and all values are required.`);
+  if (!data || !data.date || !data.dailyRate || !data.averageRate) {
+    throw new Error(`${functionName}: Data with all values are required, except for originalRate wich can be null.`);
   }
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
