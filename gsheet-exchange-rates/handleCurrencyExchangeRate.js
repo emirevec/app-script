@@ -2,7 +2,7 @@ function handleCurrencyExchangeRate({sheetName, date, fetcherFunction}) {
   const functionName = `handleCurrencyExchangeRate (${sheetName})`;
 
   if (!sheetName || !date || !fetcherFunction) {
-    throw new Error(`${functionName}: sheetName, date, and fetcherFunction are required.`);
+    throw new Error(`[${functionName}] sheetName, date, and fetcherFunction are required.`);
   }
 
   try {
@@ -25,6 +25,6 @@ function handleCurrencyExchangeRate({sheetName, date, fetcherFunction}) {
     updateExchangeRateInSheet({ sheetName: sheetName, data: data});
 
   } catch (error) {
-    Logger.log(`${functionName}: An error occurred while processing: ${error}`);
+    Logger.log(`[${functionName}] An error occurred while processing: ${error}`);
   }
 }

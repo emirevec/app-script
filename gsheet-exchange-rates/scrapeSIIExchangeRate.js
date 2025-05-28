@@ -2,7 +2,7 @@ function scrapeSIIExchangeRate({date}) {
   const functionName = "scrapeSIIExchangeRate";
   
   if (!date) {
-    throw new Error(`${functionName}:Date is required.`);
+    throw new Error(`[${functionName}] Date is required.`);
   }
   
   const year = date.getFullYear();
@@ -15,7 +15,7 @@ function scrapeSIIExchangeRate({date}) {
   const monthName = monthNames[date.getMonth()];
 
   try {
-    Logger.log(`${functionName}: Fetching content from: ${WEB_URL}`);
+    Logger.log(`[${functionName}] Fetching content from: ${WEB_URL}`);
     const response = UrlFetchApp.fetch(WEB_URL, { muteHttpExceptions: true });
     const htmlContent = response.getContentText("UTF-8");
 
@@ -55,15 +55,15 @@ function scrapeSIIExchangeRate({date}) {
     }
 
     if (clpValue !== null) {
-      Logger.log(`[${functionName}] SII CLP Exchange Rate: ${clpValue}`);
+      Logger.log(`[[${functionName}] SII CLP Exchange Rate: ${clpValue}`);
       return clpValue;
     } else {
-      Logger.log(`[${functionName}] Could not find or extract CLP exchange rate for day ${dayOfMonth} within month '${monthName}' block. Please ensure the website structure hasn't changed.`);
+      Logger.log(`[[${functionName}] Could not find or extract CLP exchange rate for day ${dayOfMonth} within month '${monthName}' block. Please ensure the website structure hasn't changed.`);
       return null;
     }
 
   } catch (error) {
-    Logger.log(`${functionName}: An error occurred: ${error}.`);
+    Logger.log(`[${functionName}] An error occurred: ${error}.`);
     return null;
   }
 }

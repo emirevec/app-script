@@ -2,7 +2,7 @@ function fetchBCRAExchangeRateByDate({date}){
   const functionName = "fetchBCRAExchangeRateByDate";
 
   if (!date) {
-    throw new Error(`${functionName}:Date is required.`);
+    throw new Error(`[${functionName}] Date is required.`);
   }
 
   const beforeToday = new Date();
@@ -13,7 +13,7 @@ function fetchBCRAExchangeRateByDate({date}){
   const apiEndpoint = API_BASE_URL + queryParams;
 
   try {
-    Logger.log(`${functionName}: Fetching exchange rate from: ${apiEndpoint}`);
+    Logger.log(`[${functionName}] Fetching exchange rate from: ${apiEndpoint}`);
     const response = UrlFetchApp.fetch(apiEndpoint);
     const responseCode = response.getResponseCode();
 
@@ -29,7 +29,7 @@ function fetchBCRAExchangeRateByDate({date}){
     }
 
     if (data.results.length === 0) {
-      Logger.log(`${functionName}: No data found for the specified date.`);
+      Logger.log(`[${functionName}] No data found for the specified date.`);
       return null;
     }
 
@@ -51,7 +51,7 @@ function fetchBCRAExchangeRateByDate({date}){
   }
 
   catch (error) {
-    Logger.log(`${functionName}: An error occurred: ${error}`);
+    Logger.log(`[${functionName}] An error occurred: ${error}`);
     return null
   }
 }
