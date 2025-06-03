@@ -1,4 +1,4 @@
-function scrapeSIIExchangeRate({date}) {
+function scrapeSIIExchangeRateByDate({date}) {
   const functionName = "scrapeSIIExchangeRate";
   
   if (!date) {
@@ -55,10 +55,10 @@ function scrapeSIIExchangeRate({date}) {
     }
 
     if (clpValue !== null) {
-      Logger.log(`[[${functionName}] SII CLP Exchange Rate: ${clpValue}`);
+      Logger.log(`[${functionName}] SII CLP Exchange Rate: ${clpValue}`);
       return clpValue;
     } else {
-      Logger.log(`[[${functionName}] Could not find or extract CLP exchange rate for day ${dayOfMonth} within month '${monthName}' block. Please ensure the website structure hasn't changed.`);
+      Logger.log(`[${functionName}] Could not find or extract CLP exchange rate for day ${dayOfMonth} within month '${monthName}' block. Please ensure the website structure hasn't changed.`);
       return null;
     }
 
