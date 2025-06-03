@@ -5,9 +5,9 @@ function fetchBCRAExchangeRateByDate({date}){
     throw new Error(`[${functionName}] Date is required.`);
   }
 
-  const beforeToday = new Date();
-  beforeToday.setDate(date.getDate() - 1); 
-  const formattedDate = Utilities.formatDate(beforeToday, "America/Argentina/Buenos_Aires", "yyyy-MM-dd");
+  /* const beforeToday = new Date();
+  beforeToday.setDate(date.getDate() - 1);  */
+  const formattedDate = Utilities.formatDate(date, "America/Argentina/Buenos_Aires", "yyyy-MM-dd");
   const API_BASE_URL = "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/usd?"
   const queryParams = `fechaDesde=${formattedDate}&fechaHasta=${formattedDate}`
   const apiEndpoint = API_BASE_URL + queryParams;
