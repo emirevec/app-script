@@ -80,10 +80,25 @@ function updateExchangeRateInSheet({sheetName, data}) {
     throw new Error(`[${functionName}] Sheet "${sheetName}" not found.`);
   }
 
+  const todayRowData = [
+    data.date,
+    data.dailyRate,
+    data.averageRate,
+    data.originalRate
+  ];
+
+  const tomorrow = new Date();
+  tomorrow.setDate(data.date.getDate() + 1); 
+
+  const tomorrowRowData = [
+    tomorrow,
+    data.dailyRate,
+    data.averageRate,
+    data.originalRate
+  ];
+  
   sheet.insertRowBefore(2);
-  sheet.getRange(2, 1).setValue(data.date);
-  sheet.getRange(2, 2).setValue(data.dailyRate);
-  sheet.getRange(2, 3).setValue(data.averageRate);
-  sheet.getRange(2, 4).setValue(data.originalRate);
+  sheet.getRange(2, 1, 2, 4).setValues([tomorrowRowData, todayRowData]);
+
   Logger.log(`[${functionName}] Successfully updated exchange rate on ${data.date} in sheet "${sheetName}".`);
 }
