@@ -80,18 +80,20 @@ function updateExchangeRateInSheet({sheetName, data}) {
     throw new Error(`[${functionName}] Sheet "${sheetName}" not found.`);
   }
 
+  const dateForSheet = new Date(data.date.getFullYear(), data.date.getMonth(), data.date.getDate());
+
   const todayRowData = [
-    data.date,
+    dateForSheet,
     data.dailyRate,
     data.averageRate,
     data.originalRate
   ];
 
-  const tomorrow = new Date();
-  tomorrow.setDate(data.date.getDate() + 1); 
+  const tomorrowDateForSheet = new Date(dateForSheet);
+  tomorrowDateForSheet.setDate(tomorrowDateForSheet.getDate() + 1);
 
   const tomorrowRowData = [
-    tomorrow,
+    tomorrowDateForSheet,
     data.dailyRate,
     data.averageRate,
     data.originalRate
