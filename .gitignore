@@ -1,9 +1,11 @@
-# Ignore config variables
-gsheet-pnl-report/config.js
-gsheet-exchange-rates/config.js
+# Config variables
+*/config.js
 
-# Ignore draft files
+# Draft files
 drafts/*
+
+# Docs
+*/Docs
 
 # Logs
 logs
